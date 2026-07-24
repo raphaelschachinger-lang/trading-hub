@@ -130,7 +130,7 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 .regime-name.goldilocks{color:#22c55e}
 .regime-name.overheated{color:#f59e0b}
 .regime-name.stagflation{color:#ef4444}
-.regime-name.recession{color:#3b82f6}
+.regime-name.reflation{color:#3b82f6}
 .score-badges{display:flex;gap:8px;margin-top:10px}
 .eco-pill{display:flex;align-items:center;gap:6px;background:#161616;border:1px solid #2a2a2a;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:600;color:#ccc}
 .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
@@ -167,11 +167,11 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 .eco-alloc-name.goldilocks{color:#22c55e}
 .eco-alloc-name.overheated{color:#f59e0b}
 .eco-alloc-name.stagflation{color:#ef4444}
-.eco-alloc-name.recession{color:#3b82f6}
+.eco-alloc-name.reflation{color:#3b82f6}
 .eco-alloc-sigs{font-size:13px;color:#888;margin-bottom:22px;display:flex;gap:10px}
 .eco-bars{display:flex;flex-direction:column;gap:14px}
 .eco-bar-row{display:flex;align-items:center;gap:12px}
-.eco-bar-lbl{font-size:13px;color:#aaa;min-width:170px}
+.eco-bar-lbl{font-size:13px;color:#aaa;min-width:230px;display:flex;align-items:center}
 .eco-bar-wrap{flex:1;height:5px;background:#1e1e1e;border-radius:3px;overflow:hidden}
 .eco-bar-fill{height:100%;border-radius:3px}
 .eco-bar-pct{font-size:13px;font-weight:700;min-width:38px;text-align:right}
@@ -183,9 +183,14 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 .eco-reg-name.goldilocks{color:#22c55e}
 .eco-reg-name.overheated{color:#f59e0b}
 .eco-reg-name.stagflation{color:#ef4444}
-.eco-reg-name.recession{color:#3b82f6}
+.eco-reg-name.reflation{color:#3b82f6}
 .eco-reg-sigs{font-size:11px;color:#444;margin-bottom:6px}
 .eco-reg-alloc{font-size:11px;color:#555;line-height:1.7}
+.acct-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;flex-shrink:0}
+.eco-reg-line{display:flex;align-items:center;gap:2px;line-height:1.9}
+.eco-reg-line b{color:#999;margin-left:auto;padding-left:8px;font-weight:700}
+.eco-line-isin{color:#3a3a3a;font-size:9.5px;font-family:var(--mono);margin-left:5px}
+.eco-bar-isin{color:#444;font-size:11px;font-family:var(--mono);margin-left:6px}
 #server-banner{display:none;background:#1a0a0a;border:1px solid #7f1d1d;border-radius:8px;padding:14px 18px;margin-bottom:24px;font-size:13px;color:#fca5a5;line-height:1.6}
 #server-banner code{background:#2a0a0a;padding:2px 6px;border-radius:4px;font-family:monospace}
 @media(max-width:1200px){.eco-c4,.eco-c3{grid-template-columns:repeat(2,1fr)}}
@@ -199,7 +204,7 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 .clock-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-bottom:8px}
 .clock-regime{font-size:28px;font-weight:900;letter-spacing:2px;margin-bottom:10px}
 .clock-regime.goldilocks{color:#22c55e}.clock-regime.overheated{color:#f59e0b}
-.clock-regime.stagflation{color:#ef4444}.clock-regime.recession{color:#3b82f6}
+.clock-regime.stagflation{color:#ef4444}.clock-regime.reflation{color:#3b82f6}
 .clock-raw{font-size:12px;color:#555;margin-bottom:14px}
 .clock-badge-obs{display:inline-flex;align-items:center;gap:6px;background:#1a1400;border:1px solid #57460a;color:#f5c842;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;margin-bottom:10px}
 .clock-alert{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#1a0a0a;border:1px solid #7f1d1d;color:#fca5a5;padding:10px 14px;border-radius:8px;font-size:12px;margin-top:10px}
@@ -414,22 +419,22 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
           <div class="eco-reg-card" id="regime-goldilocks">
             <div class="eco-reg-name goldilocks">GOLDILOCKS</div>
             <div class="eco-reg-sigs">Inflation ✅ Growth ✅</div>
-            <div class="eco-reg-alloc">ETF World 50%<br>Growth Stock 35%<br>Cyclical Stock 15%</div>
+            <div class="eco-reg-alloc" id="reg-alloc-goldilocks"></div>
           </div>
           <div class="eco-reg-card" id="regime-overheated">
             <div class="eco-reg-name overheated">OVERHEATED</div>
             <div class="eco-reg-sigs">Inflation 🔴 Growth ✅</div>
-            <div class="eco-reg-alloc">Cyclical/Energy 45%<br>ETF World 25%<br>Growth Stock 15%<br>Commodities 10%<br>Cash 5%</div>
+            <div class="eco-reg-alloc" id="reg-alloc-overheated"></div>
           </div>
           <div class="eco-reg-card" id="regime-stagflation">
             <div class="eco-reg-name stagflation">STAGFLATION</div>
             <div class="eco-reg-sigs">Inflation 🔴 Growth 🔴</div>
-            <div class="eco-reg-alloc">Gold 30%<br>Energy/Commod. 30%<br>Defensive 20%<br>Cash 20%</div>
+            <div class="eco-reg-alloc" id="reg-alloc-stagflation"></div>
           </div>
-          <div class="eco-reg-card" id="regime-recession">
-            <div class="eco-reg-name recession">RECESSION</div>
+          <div class="eco-reg-card" id="regime-reflation">
+            <div class="eco-reg-name reflation">REFLATION</div>
             <div class="eco-reg-sigs">Inflation ✅ Growth 🔴</div>
-            <div class="eco-reg-alloc">30Y Bonds 35%<br>Defensive 30%<br>ETF World 20%<br>Growth Stock 10%<br>Cash 5%</div>
+            <div class="eco-reg-alloc" id="reg-alloc-reflation"></div>
           </div>
         </div>
       </div>
@@ -990,12 +995,29 @@ const T={
   philly:{danger:-10,attention:0},nfp:{strong:200,neutral:50},
   breadth:{ok:1.0,danger:-1.0},hy:{danger:5.0,attention:3.5},
 };
+// account: 'pea' | 'cto' | null(Cash, hors PEA/CTO) — pilote la teinte de la pastille/barre
 const REGIMES={
-  goldilocks:{name:'GOLDILOCKS',cls:'goldilocks',allocs:[{label:'ETF World',pct:50,color:'#22c55e'},{label:'Growth Stock',pct:35,color:'#22c55e'},{label:'Cyclical Stock',pct:15,color:'#22c55e'}]},
-  overheated:{name:'OVERHEATED',cls:'overheated',allocs:[{label:'Cyclical/Energy Stock',pct:45,color:'#f59e0b'},{label:'ETF World',pct:25,color:'#22c55e'},{label:'Growth Stock',pct:15,color:'#22c55e'},{label:'Commodities',pct:10,color:'#f59e0b'},{label:'Cash',pct:5,color:'#888'}]},
-  stagflation:{name:'STAGFLATION',cls:'stagflation',allocs:[{label:'Gold',pct:30,color:'#f59e0b'},{label:'Energy / Commod. Stock',pct:30,color:'#ef4444'},{label:'Defensive Stock',pct:20,color:'#22c55e'},{label:'Cash',pct:20,color:'#888'}]},
-  recession:{name:'RECESSION',cls:'recession',allocs:[{label:'30Y Bonds',pct:35,color:'#3b82f6'},{label:'Defensive Stock',pct:30,color:'#22c55e'},{label:'ETF World',pct:20,color:'#22c55e'},{label:'Growth Stock',pct:10,color:'#22c55e'},{label:'Cash',pct:5,color:'#888'}]},
+  goldilocks:{name:'GOLDILOCKS',cls:'goldilocks',allocs:[
+    {label:'ETF World',isin:'FR001400U5Q4',pct:70,account:'pea'},
+    {label:'Nasdaq-100',isin:'FR001400ZGR7',pct:30,account:'pea'},
+  ]},
+  overheated:{name:'OVERHEATED',cls:'overheated',allocs:[
+    {label:'ETF World',isin:'FR001400U5Q4',pct:30,account:'pea'},
+    {label:'Commodities',isin:'LU1829218749',pct:60,account:'cto'},
+    {label:'Cash',pct:10,account:null},
+  ]},
+  stagflation:{name:'STAGFLATION',cls:'stagflation',allocs:[
+    {label:'Cash',pct:50,account:null},
+    {label:'Defensive US',isin:'FR001400KE06',pct:50,account:'pea'},
+  ]},
+  reflation:{name:'REFLATION',cls:'reflation',allocs:[
+    {label:'Bonds 30Y',isin:'IE00BD8PGZ49',pct:60,account:'cto'},
+    {label:'Defensive US',isin:'FR001400KE06',pct:20,account:'pea'},
+    {label:'ETF World',isin:'FR001400U5Q4',pct:10,account:'pea'},
+    {label:'Cash',pct:10,account:null},
+  ]},
 };
+const ACCOUNT_COLOR={pea:'#4f8ef7',cto:'#f5c842',null:'#888'};
 const echarts={};
 
 function statusOf(val,type){
@@ -1183,8 +1205,9 @@ function updateClockNeedle(growthNorm,inflationNorm){
 // ── Hystérésis / confirmation de régime (2 lectures consécutives) ──
 const LS_HISTORY='macro_regime_history',LS_CONFIRMED='macro_confirmed_regime',LS_ACK='macro_alert_ack_regime';
 function updateRegimeConfirmation(rawKey){
-  let history=JSON.parse(localStorage.getItem(LS_HISTORY)||'[]');
+  let history=(JSON.parse(localStorage.getItem(LS_HISTORY)||'[]')).filter(k=>REGIMES[k]);
   let confirmed=localStorage.getItem(LS_CONFIRMED);
+  if(confirmed&&!REGIMES[confirmed])confirmed=null; // ex: ancienne clé "recession" avant renommage en "reflation"
   let candidate=null;
   if(!confirmed){
     confirmed=rawKey; // premher relevé jamais enregistré : on adopte la lecture actuelle
@@ -1250,6 +1273,19 @@ function initRebalInputs(){
   updateRebalGauge();
 }
 
+// Grille de référence "TOUS LES RÉGIMES" — statique, pilotée par REGIMES pour ne pas dupliquer les données
+function initRegimeReferenceCards(){
+  Object.keys(REGIMES).forEach(key=>{
+    const el=document.getElementById('reg-alloc-'+key);
+    if(!el)return;
+    el.innerHTML=REGIMES[key].allocs.map(a=>{
+      const c=ACCOUNT_COLOR[a.account];
+      const isin=a.isin?`<span class="eco-line-isin">${a.isin}</span>`:'';
+      return`<div class="eco-reg-line"><span class="acct-dot" style="background:${c}"></span>${a.label}${isin}<b>${a.pct}%</b></div>`;
+    }).join('');
+  });
+}
+
 function applyRegime(key,iScore,iMax,gScore,gMax,cScore,cMax){
   const r=REGIMES[key];
   const iA=iScore>=iMax*.5,gA=gScore>=gMax*.5;
@@ -1266,8 +1302,12 @@ function applyRegime(key,iScore,iMax,gScore,gMax,cScore,cMax){
   document.getElementById('dot-credit').className='dot '+(cScore>=1?'red':'green');
   const an=document.getElementById('alloc-regime-name');an.textContent=r.name;an.className='eco-alloc-name '+r.cls;
   document.getElementById('alloc-signals').innerHTML=`<span>Inflation ${iA?'🔴':'✅'}</span><span>Growth ${gA?'🔴':'✅'}</span>`;
-  document.getElementById('alloc-bars').innerHTML=r.allocs.map(a=>`<div class="eco-bar-row"><div class="eco-bar-lbl">${a.label}</div><div class="eco-bar-wrap"><div class="eco-bar-fill" style="width:${a.pct}%;background:${a.color}"></div></div><div class="eco-bar-pct" style="color:${a.color}">${a.pct}%</div></div>`).join('');
-  ['goldilocks','overheated','stagflation','recession'].forEach(k=>document.getElementById('regime-'+k)?.classList.toggle('active',k===key));
+  document.getElementById('alloc-bars').innerHTML=r.allocs.map(a=>{
+    const c=ACCOUNT_COLOR[a.account];
+    const isin=a.isin?`<span class="eco-bar-isin">${a.isin}</span>`:'';
+    return`<div class="eco-bar-row"><div class="eco-bar-lbl"><span class="acct-dot" style="background:${c}"></span>${a.label}${isin}</div><div class="eco-bar-wrap"><div class="eco-bar-fill" style="width:${a.pct}%;background:${c}"></div></div><div class="eco-bar-pct" style="color:${c}">${a.pct}%</div></div>`;
+  }).join('');
+  ['goldilocks','overheated','stagflation','reflation'].forEach(k=>document.getElementById('regime-'+k)?.classList.toggle('active',k===key));
 }
 
 async function refreshAll(){
@@ -1287,7 +1327,7 @@ async function refreshAll(){
   const gScore=sPhilly+sNFP+sBreadth;
   const cScore=sHY;
   const iA=iScore>=4,gA=gScore>=3;
-  const rawKey=iA&&gA?'stagflation':iA&&!gA?'overheated':!iA&&gA?'recession':'goldilocks';
+  const rawKey=iA&&gA?'stagflation':iA&&!gA?'overheated':!iA&&gA?'reflation':'goldilocks';
 
   // Horloge : position continue de l'aiguille, indépendante de la confirmation de régime
   const growthNorm=1-2*(gScore/6),inflationNorm=2*(iScore/8)-1;
@@ -1350,6 +1390,7 @@ function clock(){
 setInterval(clock,1000);clock();
 
 initClockDial();
+initRegimeReferenceCards();
 initRebalInputs();
 goTab('dashboard');
 </script>
