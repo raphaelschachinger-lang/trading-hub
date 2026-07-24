@@ -141,16 +141,26 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 .eco-sec-score{font-size:12px;color:#666;display:flex;align-items:center;gap:8px}
 .eco-grid{display:grid;gap:14px}
 .eco-c4{grid-template-columns:repeat(4,1fr)}
-.eco-c3{grid-template-columns:repeat(3,1fr)}
 .eco-c1{grid-template-columns:1fr;max-width:380px}
-.ecard{background:#111;border:1px solid #1e1e1e;border-radius:12px;padding:16px 18px;position:relative;overflow:hidden}
+.ecard{background:#111;border:1px solid #1e1e1e;border-radius:12px;padding:16px 18px;position:relative;overflow:visible}
 .ecard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:2px 2px 0 0}
 .ecard.ok::before{background:#22c55e}
 .ecard.attention::before{background:#f59e0b}
 .ecard.danger::before{background:#ef4444}
+.ecard-clickable{cursor:pointer;transition:border-color .15s}
+.ecard-clickable:hover{border-color:#333}
 .ecard-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.ecard-hdr-right{display:flex;align-items:center;gap:7px;flex-shrink:0}
 .ecard-ttl{font-size:13px;font-weight:700;color:#ddd}
 .ecard-sub{font-size:11px;color:#444;margin-top:2px}
+.ecard-info{position:relative;display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;color:#4a4a4a;font-size:11px;line-height:1;cursor:help}
+.ecard-info:hover{color:#999}
+.ecard-tooltip{position:absolute;top:calc(100% + 8px);left:50%;transform:translate(-50%,-4px);width:210px;max-width:60vw;background:#111;border:1px solid #262626;color:#aaa;font:400 11px var(--sans);line-height:1.5;padding:9px 11px;border-radius:8px;text-align:left;box-shadow:0 6px 20px rgba(0,0,0,.55);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .15s ease,transform .15s ease;z-index:80}
+.ecard-info:hover .ecard-tooltip{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.eco-grid .ecard:first-child .ecard-tooltip{left:0;transform:translate(0,-4px)}
+.eco-grid .ecard:first-child .ecard-info:hover .ecard-tooltip{transform:translate(0,0)}
+.eco-grid .ecard:last-child .ecard-tooltip{left:auto;right:0;transform:translate(0,-4px)}
+.eco-grid .ecard:last-child .ecard-info:hover .ecard-tooltip{transform:translate(0,0)}
 .ebadge{font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;letter-spacing:.5px;white-space:nowrap}
 .ebadge.ok{background:#052e16;color:#22c55e;border:1px solid #166534}
 .ebadge.attention{background:#451a03;color:#f59e0b;border:1px solid #92400e}
@@ -193,8 +203,8 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 .eco-bar-isin{color:#444;font-size:11px;font-family:var(--mono);margin-left:6px}
 #server-banner{display:none;background:#1a0a0a;border:1px solid #7f1d1d;border-radius:8px;padding:14px 18px;margin-bottom:24px;font-size:13px;color:#fca5a5;line-height:1.6}
 #server-banner code{background:#2a0a0a;padding:2px 6px;border-radius:4px;font-family:monospace}
-@media(max-width:1200px){.eco-c4,.eco-c3{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:768px){.eco-c4,.eco-c3,.eco-alloc-grid{grid-template-columns:1fr}}
+@media(max-width:1200px){.eco-c4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.eco-c4,.eco-alloc-grid{grid-template-columns:1fr}}
 
 /* ══ HORLOGE DE L'INVESTISSEMENT ══ */
 .clock-box{background:#111;border:1px solid #1e1e1e;border-radius:12px;padding:22px 24px;display:flex;gap:32px;align-items:center;flex-wrap:wrap}
@@ -350,7 +360,7 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
       <div class="eco-sec-ttl">02 — GROWTH</div>
       <div class="eco-sec-score">Score <span id="score-growth">—</span> <span class="dot" id="dot-growth"></span></div>
     </div>
-    <div class="eco-grid eco-c3">
+    <div class="eco-grid eco-c4">
       <div class="ecard" id="card-philly">
         <div class="ecard-hdr"><div><div class="ecard-ttl">Philly Fed Mfg</div><div class="ecard-sub">Diffusion index · FRED</div></div><div class="ebadge loading" id="badge-philly">…</div></div>
         <div class="ecard-val" id="value-philly">—</div><div class="ecard-date" id="date-philly">—</div>
@@ -365,6 +375,11 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
         <div class="ecard-hdr"><div><div class="ecard-ttl">Market Breadth</div><div class="ecard-sub" id="subtitle-breadth">RSP vs SPY (20j)</div></div><div class="ebadge loading" id="badge-breadth">…</div></div>
         <div class="ecard-val" id="value-breadth">—</div><div class="ecard-date" id="date-breadth">—</div>
         <div class="echart"><canvas id="chart-breadth"></canvas></div>
+      </div>
+      <div class="ecard" id="card-curve">
+        <div class="ecard-hdr"><div><div class="ecard-ttl">Courbe des Taux</div><div class="ecard-sub">Spread 10Y-3M · FRED T10Y3M</div></div><div class="ebadge loading" id="badge-curve">…</div></div>
+        <div class="ecard-val" id="value-curve">—</div><div class="ecard-date" id="date-curve">—</div>
+        <div class="echart"><canvas id="chart-curve"></canvas></div>
       </div>
     </div>
   </div>
@@ -948,6 +963,7 @@ const T={
   dgs10:{danger:4.5,attention:3.5},move:{danger:120,attention:80},
   philly:{danger:-10,attention:0},nfp:{strong:200,neutral:50},
   breadth:{ok:1.0,danger:-1.0},hy:{danger:5.0,attention:3.5},
+  curve:{danger:0,attention:0.5},
 };
 // account: 'pea' | 'cto' | null(Cash, hors PEA/CTO) — pilote la teinte de la pastille/barre
 const REGIMES={
@@ -974,9 +990,45 @@ const REGIMES={
 const ACCOUNT_COLOR={pea:'#4f8ef7',cto:'#f5c842',null:'#888'};
 const echarts={};
 
+// ── Tooltip "i" + carte cliquable vers la source officielle ──
+const CARD_INFO={
+  cpi:{tip:"Indice des prix à la consommation US, variation sur 12 mois. La mesure officielle de l'inflation réalisée.",url:'https://fred.stlouisfed.org/series/CPIAUCSL'},
+  mich:{tip:"Anticipations d'inflation des ménages US à 1 an (enquête Michigan). Indicateur avancé — précède souvent le CPI réel.",url:'https://fred.stlouisfed.org/series/MICH'},
+  dgs10:{tip:"Taux des obligations d'État US à 10 ans. Reflète les anticipations de croissance, d'inflation et la politique de la Fed.",url:'https://fred.stlouisfed.org/series/DGS10'},
+  move:{tip:'Volatilité implicite du marché obligataire US (équivalent du VIX pour les taux). Mesure le stress sur le marché des taux.',url:'https://finance.yahoo.com/quote/%5EMOVE/'},
+  philly:{tip:'Indice manufacturier de la Fed de Philadelphie. Au-dessus de 0 = expansion, en dessous = contraction.',url:'https://fred.stlouisfed.org/series/GACDFSA066MSFRBPHI'},
+  nfp:{tip:"Créations nettes d'emplois non-agricoles aux US le mois précédent. L'indicateur emploi le plus suivi au monde.",url:'https://fred.stlouisfed.org/series/PAYEMS'},
+  breadth:{tip:'Compare le S&P 500 équipondéré (RSP) au S&P 500 pondéré par capitalisation (SPY). Indique si la hausse du marché est large ou concentrée sur quelques titres.',url:'https://finance.yahoo.com/quote/RSP/'},
+  curve:{tip:'Écart entre le taux 10 ans et le taux 3 mois. Une inversion (valeur négative) a précédé chaque récession US depuis les années 1950, avec 6 à 18 mois d’avance.',url:'https://fred.stlouisfed.org/series/T10Y3M'},
+  hy:{tip:'Écart de rendement entre obligations à haut risque et bons du Trésor. Thermomètre du risque de crédit.',url:'https://fred.stlouisfed.org/series/BAMLH0A0HYM2'},
+};
+function initCardInfoTooltips(){
+  Object.keys(CARD_INFO).forEach(id=>{
+    const card=document.getElementById('card-'+id);
+    const badge=document.getElementById('badge-'+id);
+    if(!card||!badge)return;
+    const{tip,url}=CARD_INFO[id];
+    const wrap=document.createElement('div');
+    wrap.className='ecard-hdr-right';
+    badge.parentNode.insertBefore(wrap,badge);
+    const icon=document.createElement('span');
+    icon.className='ecard-info';
+    icon.textContent='ⓘ';
+    icon.addEventListener('click',e=>e.stopPropagation());
+    const bubble=document.createElement('span');
+    bubble.className='ecard-tooltip';
+    bubble.textContent=tip;
+    icon.appendChild(bubble);
+    wrap.appendChild(icon);
+    wrap.appendChild(badge);
+    card.classList.add('ecard-clickable');
+    card.addEventListener('click',()=>window.open(url,'_blank','noopener'));
+  });
+}
+
 function statusOf(val,type){
   const t=T[type];
-  if(type==='philly')return val<t.danger?'danger':val<t.attention?'attention':'ok';
+  if(type==='philly'||type==='curve')return val<t.danger?'danger':val<t.attention?'attention':'ok';
   if(type==='nfp')return val>=t.strong?'ok':val>=t.neutral?'attention':'danger';
   if(type==='breadth')return val>t.ok?'ok':val>t.danger?'attention':'danger';
   return val>=t.danger?'danger':val>=t.attention?'attention':'ok';
@@ -997,14 +1049,14 @@ function esparkline(id,data,st){
 }
 
 function esetCard(id,{display,date,st,tr,chartData}){
-  document.getElementById('card-'+id).className='ecard '+st;
+  document.getElementById('card-'+id).className='ecard ecard-clickable '+st;
   const b=document.getElementById('badge-'+id);b.textContent=elbl(st);b.className='ebadge '+st;
   const v=document.getElementById('value-'+id);v.textContent=display;v.className='ecard-val '+st;
   document.getElementById('date-'+id).textContent=tr+' '+date;
   esparkline(id,chartData,st);
 }
 function esetErr(id){
-  document.getElementById('card-'+id).className='ecard attention';
+  document.getElementById('card-'+id).className='ecard ecard-clickable attention';
   const b=document.getElementById('badge-'+id);b.textContent='!';b.className='ebadge danger';
   document.getElementById('value-'+id).textContent='Erreur';
 }
@@ -1065,7 +1117,7 @@ async function loadNFP(){
     const cur=changes[0].value,st=statusOf(cur,'nfp');
     const txt=cur>=T.nfp.strong?'Strong':cur>=T.nfp.neutral?'Neutral':'Weak';
     document.getElementById('subtitle-nfp').textContent=`${cur>=0?'+':''}${Math.round(cur)}k emplois`;
-    document.getElementById('card-nfp').className='ecard '+st;
+    document.getElementById('card-nfp').className='ecard ecard-clickable '+st;
     const b=document.getElementById('badge-nfp');b.textContent=elbl(st);b.className='ebadge '+st;
     const v=document.getElementById('value-nfp');v.textContent=txt;v.className='ecard-val '+st;
     document.getElementById('date-nfp').textContent=trendArrow(changes)+' '+changes[0].date;
@@ -1085,12 +1137,16 @@ async function loadBreadth(){
     const txt=diff>T.breadth.ok?'Broad':diff>T.breadth.danger?'Neutral':'Concentrate';
     document.getElementById('subtitle-breadth').textContent=`RSP vs SPY ${diff>=0?'+':''}${diff.toFixed(1)}% (20j)`;
     const ratioData=aligned.slice(-60).map(d=>({date:d.date,value:d.value/spyMap[d.date]}));
-    document.getElementById('card-breadth').className='ecard '+st;
+    document.getElementById('card-breadth').className='ecard ecard-clickable '+st;
     const b=document.getElementById('badge-breadth');b.textContent=elbl(st);b.className='ebadge '+st;
     const v=document.getElementById('value-breadth');v.textContent=txt;v.className='ecard-val '+st;
     document.getElementById('date-breadth').textContent='→ '+cur.date;
     esparkline('breadth',ratioData,st);return epts(st);
   }catch(e){console.error('Breadth:',e);esetErr('breadth');return 0;}
+}
+async function loadCurve(){
+  try{const d=await fredFetch('T10Y3M',90);const st=statusOf(d[0].value,'curve');esetCard('curve',{display:d[0].value.toFixed(2)+' pts',date:d[0].date,st,tr:trendArrow(d),chartData:[...d].reverse()});return epts(st);}
+  catch(e){console.error('Curve:',e);esetErr('curve');return 0;}
 }
 async function loadHY(){
   try{const d=await fredFetch('BAMLH0A0HYM2',90);const st=statusOf(d[0].value,'hy');esetCard('hy',{display:d[0].value.toFixed(2)+'%',date:d[0].date,st,tr:trendArrow(d),chartData:[...d].reverse()});return epts(st);}
@@ -1239,17 +1295,17 @@ async function refreshAll(){
   document.getElementById('last-update-top').textContent=
     'Mise à jour : '+now.toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'})+' à '+now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
 
-  const[sCPI,sMICH,sDGS10,sMOVE,sPhilly,sNFP,sBreadth,sHY]=await Promise.all([
-    loadCPI(),loadMICH(),loadDGS10(),loadMOVE(),loadPhilly(),loadNFP(),loadBreadth(),loadHY()
+  const[sCPI,sMICH,sDGS10,sMOVE,sPhilly,sNFP,sBreadth,sHY,sCurve]=await Promise.all([
+    loadCPI(),loadMICH(),loadDGS10(),loadMOVE(),loadPhilly(),loadNFP(),loadBreadth(),loadHY(),loadCurve()
   ]);
   const iScore=sCPI+sMICH+sDGS10+sMOVE;
-  const gScore=sPhilly+sNFP+sBreadth;
+  const gScore=sPhilly+sNFP+sBreadth+sCurve;
   const cScore=sHY;
-  const iA=iScore>=4,gA=gScore>=3;
+  const iA=iScore>=4,gA=gScore>=4;
   const rawKey=iA&&gA?'stagflation':iA&&!gA?'overheated':!iA&&gA?'reflation':'goldilocks';
 
   // Horloge : position continue de l'aiguille, indépendante de la confirmation de régime
-  const growthNorm=1-2*(gScore/6),inflationNorm=2*(iScore/8)-1;
+  const growthNorm=1-2*(gScore/8),inflationNorm=2*(iScore/8)-1;
   updateClockNeedle(growthNorm,inflationNorm);
 
   // Hystérésis : le régime affiché/actionnable n'avance que si confirmé sur 2 lectures
@@ -1261,7 +1317,7 @@ async function refreshAll(){
   else obs.style.display='none';
   updateCtoAlert(confirmed);
 
-  applyRegime(confirmed,iScore,8,gScore,6,cScore,2);
+  applyRegime(confirmed,iScore,8,gScore,8,cScore,2);
 }
 
 // ══════════════════════════════════════════════════
@@ -1310,6 +1366,7 @@ setInterval(clock,1000);clock();
 
 initClockDial();
 initRegimeReferenceCards();
+initCardInfoTooltips();
 goTab('dashboard');
 </script>
 </body>
