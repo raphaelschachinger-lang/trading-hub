@@ -211,25 +211,6 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 .clock-alert button{background:none;border:1px solid #7f1d1d;color:#fca5a5;padding:4px 10px;border-radius:6px;font:600 10px var(--mono);cursor:pointer;flex-shrink:0}
 .clock-alert button:hover{background:#2a0a0a}
 
-/* ══ REBALANCING 70/30 ══ */
-.rebal-box{background:#111;border:1px solid #1e1e1e;border-radius:12px;padding:22px 24px}
-.rebal-inputs{display:flex;gap:24px;margin-bottom:20px;flex-wrap:wrap}
-.rebal-field{display:flex;flex-direction:column;gap:6px}
-.rebal-field label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#555}
-.rebal-field input{background:#0d0d0d;border:1px solid #2a2a2a;color:var(--text);padding:8px 12px;border-radius:6px;font:500 14px var(--mono);width:150px;outline:none}
-.rebal-field input:focus{border-color:var(--amber)}
-.rebal-summary{display:flex;gap:24px;margin-bottom:18px}
-.rebal-pct{font-size:22px;font-weight:800}
-.rebal-pct-lbl{font-size:10px;color:#555;letter-spacing:1px;text-transform:uppercase}
-.rebal-gauge-wrap{position:relative;height:22px;background:#1a1a1a;border-radius:11px;overflow:hidden}
-.rebal-band{position:absolute;top:0;bottom:0;background:rgba(34,197,94,.18);border-left:1px solid rgba(34,197,94,.4);border-right:1px solid rgba(34,197,94,.4)}
-.rebal-target-line{position:absolute;top:0;bottom:0;width:2px;background:#22c55e}
-.rebal-marker{position:absolute;top:-3px;width:4px;height:28px;border-radius:2px;background:var(--text);transform:translateX(-50%);transition:left .4s ease}
-.rebal-scale{display:flex;justify-content:space-between;font-size:10px;color:#444;margin-top:6px}
-.rebal-status{margin-top:14px;font-size:12px;font-weight:600;padding:8px 12px;border-radius:6px}
-.rebal-status.ok{background:#052e16;color:#22c55e;border:1px solid #166534}
-.rebal-status.warn{background:#451a03;color:#f59e0b;border:1px solid #92400e}
-
 /* ══ PLAN DE TRADING ══ */
 .plan-wrap{padding:24px 28px;max-width:1600px;margin:0 auto}
 .plan-hero{margin-bottom:36px}
@@ -441,33 +422,6 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
     </div>
   </div>
 
-  <!-- 05 RÉÉQUILIBRAGE 70/30 -->
-  <div class="eco-sec">
-    <div class="eco-sec-hdr"><div class="eco-sec-ttl">05 — RÉÉQUILIBRAGE 70/30 (PEA / CTO)</div></div>
-    <div class="rebal-box">
-      <div class="rebal-inputs">
-        <div class="rebal-field">
-          <label>Valeur PEA (€)</label>
-          <input type="number" id="rebal-pea" min="0" step="100" placeholder="0" oninput="updateRebalGauge()">
-        </div>
-        <div class="rebal-field">
-          <label>Valeur CTO (€)</label>
-          <input type="number" id="rebal-cto" min="0" step="100" placeholder="0" oninput="updateRebalGauge()">
-        </div>
-      </div>
-      <div class="rebal-summary">
-        <div><div class="rebal-pct" id="rebal-pea-pct" style="color:var(--accent)">—</div><div class="rebal-pct-lbl">PEA (cible 70%)</div></div>
-        <div><div class="rebal-pct" id="rebal-cto-pct" style="color:var(--amber)">—</div><div class="rebal-pct-lbl">CTO (cible 30%)</div></div>
-      </div>
-      <div class="rebal-gauge-wrap">
-        <div class="rebal-band" style="left:25%;width:10%"></div>
-        <div class="rebal-target-line" style="left:30%"></div>
-        <div class="rebal-marker" id="rebal-marker" style="left:30%"></div>
-      </div>
-      <div class="rebal-scale"><span>0%</span><span>25%</span><span>30%</span><span>35%</span><span>100%</span></div>
-      <div class="rebal-status ok" id="rebal-status">Renseigne les valeurs PEA / CTO pour voir l'écart à la cible.</div>
-    </div>
-  </div>
 </div><!-- /app-eco -->
 
 <!-- ══ APP: TRADING JOURNAL ══ -->
@@ -1238,41 +1192,6 @@ function ackRegimeAlert(){
   document.getElementById('clock-cto-alert').style.display='none';
 }
 
-// ══════════════════════════════════════════════════
-//  RÉÉQUILIBRAGE 70/30 PAR SEUIL (CORRIDOR)
-// ══════════════════════════════════════════════════
-function updateRebalGauge(){
-  const peaEl=document.getElementById('rebal-pea'),ctoEl=document.getElementById('rebal-cto');
-  const pea=parseFloat(peaEl.value)||0,cto=parseFloat(ctoEl.value)||0;
-  localStorage.setItem('macro_pea_value',peaEl.value||'');
-  localStorage.setItem('macro_cto_value',ctoEl.value||'');
-  const total=pea+cto;
-  const status=document.getElementById('rebal-status');
-  if(total<=0){
-    document.getElementById('rebal-pea-pct').textContent='—';
-    document.getElementById('rebal-cto-pct').textContent='—';
-    document.getElementById('rebal-marker').style.left='30%';
-    status.className='rebal-status ok';
-    status.textContent="Renseigne les valeurs PEA / CTO pour voir l'écart à la cible.";
-    return;
-  }
-  const ctoPct=cto/total*100,peaPct=100-ctoPct;
-  document.getElementById('rebal-pea-pct').textContent=peaPct.toFixed(1)+'%';
-  document.getElementById('rebal-cto-pct').textContent=ctoPct.toFixed(1)+'%';
-  document.getElementById('rebal-marker').style.left=Math.min(100,Math.max(0,ctoPct))+'%';
-  const inBand=ctoPct>=25&&ctoPct<=35;
-  status.className='rebal-status '+(inBand?'ok':'warn');
-  status.textContent=inBand
-    ?'✓ Dans la bande cible (25%–35%) — pas de rééquilibrage nécessaire.'
-    :`⚠ Hors bande cible (25%–35%) — rééquilibrage à considérer (CTO à ${ctoPct.toFixed(1)}%).`;
-}
-function initRebalInputs(){
-  const pea=localStorage.getItem('macro_pea_value'),cto=localStorage.getItem('macro_cto_value');
-  if(pea)document.getElementById('rebal-pea').value=pea;
-  if(cto)document.getElementById('rebal-cto').value=cto;
-  updateRebalGauge();
-}
-
 // Grille de référence "TOUS LES RÉGIMES" — statique, pilotée par REGIMES pour ne pas dupliquer les données
 function initRegimeReferenceCards(){
   Object.keys(REGIMES).forEach(key=>{
@@ -1391,7 +1310,6 @@ setInterval(clock,1000);clock();
 
 initClockDial();
 initRegimeReferenceCards();
-initRebalInputs();
 goTab('dashboard');
 </script>
 </body>
