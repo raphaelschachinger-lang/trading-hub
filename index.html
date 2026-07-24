@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trading Hub</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 (function initTheme(){
@@ -20,7 +20,7 @@
   --accent:#0a84ff; --accent-bg:rgba(10,132,255,.12);
   --ok:#30d158; --attention:#ff9f0a; --danger:#ff453a;
   --ok-bg:rgba(48,209,88,.12); --attention-bg:rgba(255,159,10,.12); --danger-bg:rgba(255,69,58,.12);
-  --mono:'IBM Plex Mono',monospace; --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,sans-serif;
 }
 :root[data-theme="light"] {
   --bg:#f5f5f7; --surface:#ffffff; --surface-2:#e5e5ea;
@@ -41,25 +41,25 @@ body{background:var(--bg);color:var(--text-primary);font-family:var(--sans);font
   transition:background .2s ease,border-color .2s ease;
 }
 .brand{display:flex;align-items:center;gap:10px;margin-right:14px;flex-shrink:0}
-.logo{color:var(--text-secondary);font:500 13px var(--mono);letter-spacing:2px}
+.logo{color:var(--text-secondary);font:500 13px var(--sans);letter-spacing:2px}
 .vbar{width:1px;background:var(--border);margin:12px 10px;height:24px;flex-shrink:0}
 .topnav{display:flex;gap:2px}
 .nbtn{
   background:none;border:none;padding:6px 16px;color:var(--text-secondary);
-  font:500 11px var(--mono);letter-spacing:.8px;cursor:pointer;
+  font:500 11px var(--sans);letter-spacing:.8px;cursor:pointer;
   border-radius:4px;transition:all .15s;text-transform:uppercase;
 }
 .nbtn:hover{color:var(--text-primary)}
 .nbtn.on,.nbtn.eco-on{color:var(--accent);background:none}
 .topbar-right{margin-left:auto;display:flex;align-items:center;gap:14px}
-.clock{font:400 11px var(--mono);color:var(--text-muted)}
+.clock{font:400 11px var(--sans);color:var(--text-muted);font-variant-numeric:tabular-nums}
 .btn-refresh{
   background:none;border:1px solid var(--border);color:var(--text-secondary);
-  padding:5px 12px;border-radius:6px;font:500 10px var(--mono);
+  padding:5px 12px;border-radius:6px;font:500 10px var(--sans);
   letter-spacing:.5px;cursor:pointer;transition:all .15s;
 }
 .btn-refresh:hover{border-color:var(--text-secondary);color:var(--text-primary)}
-#last-update-top{font:400 11px var(--mono);color:var(--text-muted)}
+#last-update-top{font:400 11px var(--sans);color:var(--text-muted)}
 .btn-theme{
   background:none;border:1px solid var(--border);color:var(--text-secondary);
   width:26px;height:26px;border-radius:6px;cursor:pointer;
@@ -73,27 +73,27 @@ body{background:var(--bg);color:var(--text-primary);font-family:var(--sans);font
 .view{display:none}.view.on{display:block}
 .stats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:20px}
 .sc{background:var(--surface);border:1px solid var(--border);padding:16px 18px;border-radius:16px}
-.sl{font:500 10px var(--sans);letter-spacing:1.2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
-.sv{font:500 22px var(--sans);color:var(--text-primary)}
+.sl{font:500 10px var(--sans);letter-spacing:.4px;color:var(--text-muted);margin-bottom:8px}
+.sv{font:500 22px var(--sans);color:var(--text-primary);font-variant-numeric:tabular-nums}
 .sv.pos{color:var(--ok)}.sv.neg{color:var(--danger)}.sv.amb{color:var(--accent)}
-.ss{font:400 11px var(--mono);color:var(--text-muted);margin-top:4px}
+.ss{font:400 11px var(--sans);color:var(--text-muted);margin-top:4px}
 .cc{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 20px}
-.ct{font:500 10px var(--sans);color:var(--text-muted);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.ct{font:500 10px var(--sans);color:var(--text-muted);letter-spacing:.4px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
 .cw{position:relative;height:200px}.cw.tall{height:270px}
 .g2{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-bottom:12px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
 .ag2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
 .tc{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:20px}
 .th{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.ttl{font:500 10px var(--sans);color:var(--text-muted);text-transform:uppercase;letter-spacing:1.2px}
+.ttl{font:500 10px var(--sans);color:var(--text-muted);letter-spacing:.4px}
 table{width:100%;border-collapse:collapse}
-thead th{padding:9px 14px;text-align:left;font:500 10px var(--sans);color:var(--text-muted);text-transform:uppercase;letter-spacing:.6px;border-bottom:1px solid var(--border);background:var(--surface-2);white-space:nowrap}
+thead th{padding:9px 14px;text-align:left;font:500 10px var(--sans);color:var(--text-muted);letter-spacing:.4px;border-bottom:1px solid var(--border);background:var(--surface-2);white-space:nowrap}
 tbody tr{border-bottom:1px solid var(--border);transition:background .1s;cursor:pointer}
 tbody tr:hover{background:var(--surface-2)}
 tbody tr:last-child{border-bottom:none}
-td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
+td{padding:10px 14px;font:400 12px var(--sans);white-space:nowrap;font-variant-numeric:tabular-nums}
 .pos{color:var(--ok)}.neg{color:var(--danger)}.amb{color:var(--accent)}
-.bg{display:inline-block;padding:2px 8px;border-radius:4px;font:500 10px var(--mono);letter-spacing:.3px}
+.bg{display:inline-block;padding:2px 8px;border-radius:4px;font:500 10px var(--sans);letter-spacing:.3px}
 .bg-w{background:var(--ok-bg);color:var(--ok);border:1px solid transparent}
 .bg-l{background:var(--danger-bg);color:var(--danger);border:1px solid transparent}
 .bg-o{background:var(--attention-bg);color:var(--attention);border:1px solid transparent}
@@ -107,17 +107,17 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;align-items:center;justify-content:center}
 .overlay.on{display:flex}
 .modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;width:640px;max-width:95vw;max-height:92vh;overflow-y:auto}
-.mt{font:500 12px var(--sans);color:var(--text-secondary);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.mt{font:500 12px var(--sans);color:var(--text-secondary);letter-spacing:.4px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border)}
 .fg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .fgp{display:flex;flex-direction:column;gap:5px}
 .fgp.full{grid-column:1/-1}
-.fl{font:500 10px var(--sans);color:var(--text-muted);text-transform:uppercase;letter-spacing:.6px}
-.fi,.fs,.fta{background:var(--surface-2);border:1px solid var(--border);color:var(--text-primary);padding:8px 10px;border-radius:8px;font:400 12px var(--mono);outline:none;transition:border-color .15s;width:100%}
+.fl{font:500 10px var(--sans);color:var(--text-muted);letter-spacing:.4px}
+.fi,.fs,.fta{background:var(--surface-2);border:1px solid var(--border);color:var(--text-primary);padding:8px 10px;border-radius:8px;font:400 12px var(--sans);outline:none;transition:border-color .15s;width:100%}
 .fi:focus,.fs:focus,.fta:focus{border-color:var(--accent)}
 .fs option{background:var(--surface)}
 .fta{resize:vertical;min-height:55px}
 .ma{display:flex;gap:8px;justify-content:flex-end;margin-top:18px;padding-top:14px;border-top:1px solid var(--border)}
-.btn-c{background:none;border:1px solid var(--border);color:var(--text-secondary);padding:7px 16px;border-radius:8px;font:400 11px var(--mono);cursor:pointer;transition:all .15s}
+.btn-c{background:none;border:1px solid var(--border);color:var(--text-secondary);padding:7px 16px;border-radius:8px;font:400 11px var(--sans);cursor:pointer;transition:all .15s}
 .btn-c:hover{border-color:var(--text-secondary);color:var(--text-primary)}
 .btn-s{background:var(--accent);border:none;color:#fff;padding:7px 20px;border-radius:8px;font:500 11px var(--sans);cursor:pointer;transition:opacity .15s}
 .btn-s:hover{opacity:.85}
@@ -125,16 +125,16 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 .pf{height:100%;border-radius:2px;transition:width .5s ease}
 .pf.g{background:var(--ok)}.pf.r{background:var(--danger)}.pf.a{background:var(--attention)}
 .fbar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-.fsel{background:var(--surface);border:1px solid var(--border);color:var(--text-secondary);padding:6px 12px;border-radius:8px;font:400 11px var(--mono);outline:none;cursor:pointer;transition:border-color .15s}
+.fsel{background:var(--surface);border:1px solid var(--border);color:var(--text-secondary);padding:6px 12px;border-radius:8px;font:400 11px var(--sans);outline:none;cursor:pointer;transition:border-color .15s}
 .fsel:focus{border-color:var(--accent);color:var(--text-primary)}
 .fsel option{background:var(--surface)}
 .arow{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}
 .arow:last-child{border-bottom:none}
-.ak{font:400 12px var(--mono);color:var(--text-muted)}
-.av{font:500 12px var(--mono);color:var(--text-primary)}
+.ak{font:400 12px var(--sans);color:var(--text-muted)}
+.av{font:500 12px var(--sans);color:var(--text-primary);font-variant-numeric:tabular-nums}
 .sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
-.stl{font:500 11px var(--sans);color:var(--text-muted);text-transform:uppercase;letter-spacing:1.2px}
-.empty{padding:32px;text-align:center;color:var(--text-muted);font:400 12px var(--mono)}
+.stl{font:500 11px var(--sans);color:var(--text-muted);letter-spacing:.4px}
+.empty{padding:32px;text-align:center;color:var(--text-muted);font:400 12px var(--sans)}
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--surface-2);border-radius:3px}
@@ -142,7 +142,7 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 /* ══ ECO DASHBOARD STYLES ══ */
 #app-eco{padding:24px 28px}
 .eco-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:36px}
-.eco-hdr-label{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px}
+.eco-hdr-label{font-size:11px;letter-spacing:.4px;color:var(--text-muted);font-weight:500;margin-bottom:6px}
 .regime-name{font-size:34px;font-weight:500;letter-spacing:1px;color:var(--accent)}
 .score-badges{display:flex;gap:8px;margin-top:10px}
 .eco-pill{display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:500;color:var(--text-secondary)}
@@ -150,7 +150,7 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 .dot.red{background:var(--danger)}.dot.green{background:var(--ok)}
 .eco-sec{margin-bottom:40px}
 .eco-sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
-.eco-sec-ttl{font-size:11px;letter-spacing:1.2px;color:var(--text-muted);font-weight:500}
+.eco-sec-ttl{font-size:11px;letter-spacing:.4px;color:var(--text-muted);font-weight:500}
 .eco-sec-score{font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:8px}
 .eco-grid{display:grid;gap:14px}
 .eco-c4{grid-template-columns:repeat(4,1fr)}
@@ -175,13 +175,13 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 .ebadge.attention{background:var(--attention-bg);color:var(--attention);border:1px solid transparent}
 .ebadge.danger{background:var(--danger-bg);color:var(--danger);border:1px solid transparent}
 .ebadge.loading{background:var(--surface-2);color:var(--text-muted);border:1px solid transparent}
-.ecard-val{font-size:30px;font-weight:500;margin:6px 0 2px;line-height:1}
+.ecard-val{font-size:30px;font-weight:500;margin:6px 0 2px;line-height:1;font-variant-numeric:tabular-nums}
 .ecard-val.ok{color:var(--ok)}.ecard-val.attention{color:var(--attention)}.ecard-val.danger{color:var(--danger)}
 .ecard-date{font-size:11px;color:var(--text-muted);margin-bottom:6px}
 .echart{height:58px;margin-top:6px}
 .eco-alloc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .eco-alloc-box,.eco-regimes-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px 24px}
-.eco-alloc-lbl{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+.eco-alloc-lbl{font-size:10px;letter-spacing:.4px;color:var(--text-muted);font-weight:500;margin-bottom:8px}
 .eco-alloc-name{font-size:26px;font-weight:500;letter-spacing:.5px;margin-bottom:4px;color:var(--accent)}
 .eco-alloc-sigs{font-size:13px;color:var(--text-secondary);margin-bottom:22px;display:flex;gap:10px}
 .eco-bars{display:flex;flex-direction:column;gap:14px}
@@ -189,8 +189,8 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 .eco-bar-lbl{font-size:13px;color:var(--text-secondary);min-width:230px;display:flex;align-items:center}
 .eco-bar-wrap{flex:1;height:5px;background:var(--surface-2);border-radius:3px;overflow:hidden}
 .eco-bar-fill{height:100%;border-radius:3px;background:var(--accent)}
-.eco-bar-pct{font-size:13px;font-weight:500;min-width:38px;text-align:right;color:var(--accent)}
-.eco-reg-ttl{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px}
+.eco-bar-pct{font-size:13px;font-weight:500;min-width:38px;text-align:right;color:var(--accent);font-variant-numeric:tabular-nums}
+.eco-reg-ttl{font-size:10px;letter-spacing:.4px;color:var(--text-muted);font-weight:500;margin-bottom:14px}
 .eco-reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .eco-reg-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
 .eco-reg-card.active{border-color:var(--accent)}
@@ -200,10 +200,10 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 .acct-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;flex-shrink:0}
 .eco-reg-line{display:flex;align-items:center;gap:2px;line-height:1.9}
 .eco-reg-line b{color:var(--text-secondary);margin-left:auto;padding-left:8px;font-weight:500}
-.eco-line-isin{color:var(--text-muted);font-size:9.5px;font-family:var(--mono);margin-left:5px}
-.eco-bar-isin{color:var(--text-muted);font-size:11px;font-family:var(--mono);margin-left:6px}
+.eco-line-isin{color:var(--text-muted);font-size:9.5px;font-family:var(--sans);margin-left:5px}
+.eco-bar-isin{color:var(--text-muted);font-size:11px;font-family:var(--sans);margin-left:6px}
 #server-banner{display:none;background:var(--danger-bg);border:1px solid var(--danger);border-radius:12px;padding:14px 18px;margin-bottom:24px;font-size:13px;color:var(--danger);line-height:1.6}
-#server-banner code{background:var(--surface-2);padding:2px 6px;border-radius:4px;font-family:monospace}
+#server-banner code{background:var(--surface-2);padding:2px 6px;border-radius:4px;font-family:var(--sans)}
 @media(max-width:1200px){.eco-c4{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:768px){.eco-c4,.eco-alloc-grid{grid-template-columns:1fr}}
 
@@ -212,29 +212,29 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 .clock-dial-wrap{flex-shrink:0;width:220px;height:220px;position:relative}
 .clock-needle{transition:transform .7s cubic-bezier(.4,0,.2,1)}
 .clock-side{flex:1;min-width:220px}
-.clock-lbl{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+.clock-lbl{font-size:10px;letter-spacing:.4px;color:var(--text-muted);font-weight:500;margin-bottom:8px}
 .clock-regime{font-size:28px;font-weight:500;letter-spacing:.5px;margin-bottom:10px;color:var(--accent)}
 .clock-raw{font-size:12px;color:var(--text-muted);margin-bottom:14px}
 .clock-badge-obs{display:inline-flex;align-items:center;gap:6px;background:var(--attention-bg);border:1px solid transparent;color:var(--attention);padding:5px 12px;border-radius:20px;font-size:11px;font-weight:500;margin-bottom:10px}
 .clock-alert{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--danger-bg);border:1px solid transparent;color:var(--danger);padding:10px 14px;border-radius:10px;font-size:12px;margin-top:10px}
-.clock-alert button{background:none;border:1px solid var(--danger);color:var(--danger);padding:4px 10px;border-radius:6px;font:500 10px var(--mono);cursor:pointer;flex-shrink:0}
+.clock-alert button{background:none;border:1px solid var(--danger);color:var(--danger);padding:4px 10px;border-radius:6px;font:500 10px var(--sans);cursor:pointer;flex-shrink:0}
 .clock-alert button:hover{background:var(--danger-bg)}
 
 /* ══ PLAN DE TRADING ══ */
 .plan-wrap{padding:24px 28px;max-width:1600px;margin:0 auto}
 .plan-hero{margin-bottom:36px}
-.plan-hero-tag{font:500 10px var(--sans);letter-spacing:1.2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px}
+.plan-hero-tag{font:500 10px var(--sans);letter-spacing:.4px;color:var(--text-muted);margin-bottom:6px}
 .plan-hero-title{font:500 34px var(--sans);letter-spacing:1px;color:var(--text-primary)}
 .plan-hero-sub{font:400 14px var(--sans);color:var(--text-secondary);margin-top:8px}
 .plan-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 20px}
-.plan-card-ttl{font:500 11px var(--sans);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;color:var(--text-secondary)}
+.plan-card-ttl{font:500 11px var(--sans);letter-spacing:.4px;margin-bottom:14px;color:var(--text-secondary)}
 .plan-pills{display:flex;flex-wrap:wrap;gap:6px}
-.plan-pill{padding:3px 10px;border-radius:20px;font:500 11px var(--mono);background:var(--surface-2);border:1px solid var(--border);color:var(--text-secondary)}
-.plan-sub-ttl{font:500 10px var(--sans);letter-spacing:1px;text-transform:uppercase;margin:14px 0 8px;padding-bottom:8px;border-bottom:1px solid var(--border);color:var(--text-secondary)}
+.plan-pill{padding:3px 10px;border-radius:20px;font:500 11px var(--sans);background:var(--surface-2);border:1px solid var(--border);color:var(--text-secondary)}
+.plan-sub-ttl{font:500 10px var(--sans);letter-spacing:.4px;margin:14px 0 8px;padding-bottom:8px;border-bottom:1px solid var(--border);color:var(--text-secondary)}
 .plan-ci{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;border:1px solid var(--border);cursor:pointer;transition:all .15s;user-select:none;margin-bottom:6px}
 .plan-ci:hover{border-color:var(--text-muted);background:var(--surface-2)}
 .plan-ci.on{border-color:var(--ok);background:var(--ok-bg)}
-.plan-ci-num{font:500 10px var(--mono);width:20px;height:20px;border-radius:4px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text-muted);transition:all .15s}
+.plan-ci-num{font:500 10px var(--sans);width:20px;height:20px;border-radius:4px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text-muted);transition:all .15s}
 .plan-ci.on .plan-ci-num{background:var(--ok);border-color:var(--ok);color:#000}
 .plan-ci-txt{font:400 13px var(--sans);color:var(--text-secondary);flex:1;line-height:1.4;transition:color .15s}
 .plan-ci.on .plan-ci-txt{color:var(--text-primary)}
@@ -256,7 +256,7 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
     <button class="nbtn"    id="btn-plan"      onclick="goTab('plan')">Plan</button>
   </nav>
   <div class="topbar-right">
-    <span id="last-update-top" style="display:none;font:400 11px var(--mono);color:var(--text-muted)">—</span>
+    <span id="last-update-top" style="display:none;font:400 11px var(--sans);color:var(--text-muted)">—</span>
     <button class="btn-refresh" id="btn-eco-refresh" onclick="refreshAll()">↺ Actualiser</button>
     <button class="btn-theme" id="btn-theme" onclick="toggleTheme()" title="Changer de thème">☾</button>
     <div class="clock" id="clock"></div>
@@ -270,7 +270,7 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
   </div>
   <div class="eco-hdr">
     <div>
-      <div class="eco-hdr-label">ECONOMIC DASHBOARD</div>
+      <div class="eco-hdr-label">Economic dashboard</div>
       <div class="regime-name" id="regime-name">—</div>
       <div class="score-badges">
         <div class="eco-pill">Inflation <span class="dot" id="inflation-dot"></span><span id="inflation-score">—</span></div>
@@ -281,7 +281,7 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 
   <!-- 00 HORLOGE DE L'INVESTISSEMENT -->
   <div class="eco-sec">
-    <div class="eco-sec-hdr"><div class="eco-sec-ttl">00 — HORLOGE DE L'INVESTISSEMENT</div></div>
+    <div class="eco-sec-hdr"><div class="eco-sec-ttl">00 — Horloge de l'investissement</div></div>
     <div class="clock-box">
       <div class="clock-dial-wrap">
         <svg viewBox="0 0 240 240" width="220" height="220">
@@ -318,7 +318,7 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
   <!-- 01 INFLATION -->
   <div class="eco-sec">
     <div class="eco-sec-hdr">
-      <div class="eco-sec-ttl">01 — INFLATION</div>
+      <div class="eco-sec-ttl">01 — Inflation</div>
       <div class="eco-sec-score">Score <span id="score-inflation">—</span> <span class="dot" id="dot-inflation"></span></div>
     </div>
     <div class="eco-grid eco-c4">
@@ -348,7 +348,7 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
   <!-- 02 GROWTH -->
   <div class="eco-sec">
     <div class="eco-sec-hdr">
-      <div class="eco-sec-ttl">02 — GROWTH</div>
+      <div class="eco-sec-ttl">02 — Growth</div>
       <div class="eco-sec-score">Score <span id="score-growth">—</span> <span class="dot" id="dot-growth"></span></div>
     </div>
     <div class="eco-grid eco-c4">
@@ -378,7 +378,7 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
   <!-- 03 CRÉDIT -->
   <div class="eco-sec">
     <div class="eco-sec-hdr">
-      <div class="eco-sec-ttl">03 — CRÉDIT</div>
+      <div class="eco-sec-ttl">03 — Crédit</div>
       <div class="eco-sec-score">Score <span id="score-credit">—</span> <span class="dot" id="dot-credit"></span></div>
     </div>
     <div class="eco-grid eco-c1">
@@ -392,16 +392,16 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 
   <!-- 04 ALLOCATION CIBLE -->
   <div class="eco-sec">
-    <div class="eco-sec-hdr"><div class="eco-sec-ttl">04 — ALLOCATION CIBLE</div></div>
+    <div class="eco-sec-hdr"><div class="eco-sec-ttl">04 — Allocation cible</div></div>
     <div class="eco-alloc-grid">
       <div class="eco-alloc-box">
-        <div class="eco-alloc-lbl">RÉGIME ACTUEL</div>
+        <div class="eco-alloc-lbl">Régime actuel</div>
         <div class="eco-alloc-name" id="alloc-regime-name">—</div>
         <div class="eco-alloc-sigs" id="alloc-signals"></div>
         <div class="eco-bars" id="alloc-bars"></div>
       </div>
       <div class="eco-regimes-box">
-        <div class="eco-reg-ttl">TOUS LES RÉGIMES</div>
+        <div class="eco-reg-ttl">Tous les régimes</div>
         <div class="eco-reg-grid">
           <div class="eco-reg-card" id="regime-goldilocks">
             <div class="eco-reg-name">GOLDILOCKS</div>
@@ -438,14 +438,14 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
   <div class="view on" id="v-dashboard">
     <div class="stats" id="stats-bar"></div>
     <div class="eco-sec-hdr">
-      <div class="eco-sec-ttl">01 — PERFORMANCE</div>
+      <div class="eco-sec-ttl">01 — Performance</div>
     </div>
     <div class="g2">
       <div class="cc"><div class="ct">Courbe de capital</div><div class="cw"><canvas id="cBalance"></canvas></div></div>
       <div class="cc"><div class="ct">Win / Loss</div><div class="cw"><canvas id="cWL"></canvas></div></div>
     </div>
     <div class="eco-sec-hdr">
-      <div class="eco-sec-ttl">02 — DISTRIBUTION</div>
+      <div class="eco-sec-ttl">02 — Distribution</div>
     </div>
     <div class="g3">
       <div class="cc"><div class="ct">PnL par paire</div><div class="cw"><canvas id="cPair"></canvas></div></div>
@@ -453,7 +453,7 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
       <div class="cc"><div class="ct">FTMO Challenge Phase 1</div><div id="ftmo-m"></div></div>
     </div>
     <div class="eco-sec-hdr">
-      <div class="eco-sec-ttl">03 — DERNIERS TRADES</div>
+      <div class="eco-sec-ttl">03 — Derniers trades</div>
     </div>
     <div class="tc">
       <div class="th"><div class="ttl">Derniers trades</div></div>
@@ -479,21 +479,21 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
   <!-- ANALYTICS VIEW -->
   <div class="view" id="v-analytics">
     <div class="eco-sec-hdr">
-      <div class="eco-sec-ttl">01 — PAR INSTRUMENT</div>
+      <div class="eco-sec-ttl">01 — Par instrument</div>
     </div>
     <div class="ag2">
       <div class="cc"><div class="ct">Performance par paire ($)</div><div class="cw tall"><canvas id="caPairs"></canvas></div></div>
       <div class="cc"><div class="ct">Long vs Short</div><div class="cw tall"><canvas id="caDir"></canvas></div></div>
     </div>
     <div class="eco-sec-hdr">
-      <div class="eco-sec-ttl">02 — RISK : REWARD</div>
+      <div class="eco-sec-ttl">02 — Risk : reward</div>
     </div>
     <div class="ag2">
       <div class="cc"><div class="ct">R:R par trade</div><div class="cw"><canvas id="caRR"></canvas></div></div>
       <div class="cc"><div class="ct">Statistiques avancées</div><div id="adv-stats" style="padding-top:4px"></div></div>
     </div>
     <div class="eco-sec-hdr">
-      <div class="eco-sec-ttl">03 — TEMPOREL</div>
+      <div class="eco-sec-ttl">03 — Temporel</div>
     </div>
     <div class="ag2">
       <div class="cc"><div class="ct">PnL par jour de semaine</div><div class="cw"><canvas id="caWeek"></canvas></div></div>
@@ -516,7 +516,7 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 
   <!-- 01 ACTIFS TRADÉS -->
   <div class="eco-sec">
-    <div class="eco-sec-hdr"><div class="eco-sec-ttl">01 — ACTIFS TRADÉS</div></div>
+    <div class="eco-sec-hdr"><div class="eco-sec-ttl">01 — Actifs tradés</div></div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
       <div class="plan-card">
         <div class="plan-card-ttl">Forex</div>
@@ -547,7 +547,7 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 
   <!-- 02 SESSIONS & UNITÉS DE TEMPS -->
   <div class="eco-sec">
-    <div class="eco-sec-hdr"><div class="eco-sec-ttl">02 — SESSIONS & UNITÉS DE TEMPS</div></div>
+    <div class="eco-sec-hdr"><div class="eco-sec-ttl">02 — Sessions & unités de temps</div></div>
     <div class="plan-card" style="max-width:520px">
       <div class="arow"><span class="ak">Unité de temps</span><span class="av">Daily (D1) uniquement</span></div>
       <div class="arow"><span class="ak">Jours de trading</span><span class="av">Lundi au Vendredi</span></div>
@@ -558,7 +558,7 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
 
   <!-- 03 MONEY MANAGEMENT -->
   <div class="eco-sec">
-    <div class="eco-sec-hdr"><div class="eco-sec-ttl">03 — MONEY MANAGEMENT</div></div>
+    <div class="eco-sec-hdr"><div class="eco-sec-ttl">03 — Money management</div></div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:12px">
       <table>
         <thead><tr><th></th><th>Standard</th><th style="color:var(--accent)">FTMO Challenge</th></tr></thead>
@@ -582,16 +582,16 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
         <div class="plan-card-ttl">Gestion du Trailing Stop</div>
         <div style="display:flex;flex-direction:column;gap:8px">
           <div style="padding:10px 14px;background:var(--surface-2);border-radius:10px;border:1px solid var(--border)">
-            <div style="font:500 9px var(--sans);letter-spacing:1px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:4px">Phase 1 — Dès le début</div>
-            <div style="font:400 12px var(--mono);color:var(--text-muted)">Trailing High/Low Daily</div>
+            <div style="font:500 9px var(--sans);letter-spacing:.4px;color:var(--text-secondary);margin-bottom:4px">Phase 1 — Dès le début</div>
+            <div style="font:400 12px var(--sans);color:var(--text-muted)">Trailing High/Low Daily</div>
           </div>
           <div style="padding:10px 14px;background:var(--surface-2);border-radius:10px;border:1px solid var(--border)">
-            <div style="font:500 9px var(--sans);letter-spacing:1px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:4px">Phase 2 — 50% du TP atteint</div>
-            <div style="font:400 12px var(--mono);color:var(--text-muted)">Passer le Stop à Break-Even</div>
+            <div style="font:500 9px var(--sans);letter-spacing:.4px;color:var(--text-secondary);margin-bottom:4px">Phase 2 — 50% du TP atteint</div>
+            <div style="font:400 12px var(--sans);color:var(--text-muted)">Passer le Stop à Break-Even</div>
           </div>
           <div style="padding:10px 14px;background:var(--surface-2);border-radius:10px;border:1px solid var(--border)">
-            <div style="font:500 9px var(--sans);letter-spacing:1px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:4px">Phase 3 — 75% du TP atteint</div>
-            <div style="font:400 12px var(--mono);color:var(--text-muted)">Trailing en High/Low H4</div>
+            <div style="font:500 9px var(--sans);letter-spacing:.4px;color:var(--text-secondary);margin-bottom:4px">Phase 3 — 75% du TP atteint</div>
+            <div style="font:400 12px var(--sans);color:var(--text-muted)">Trailing en High/Low H4</div>
           </div>
         </div>
       </div>
@@ -601,8 +601,8 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
   <!-- 04 CHECKLIST -->
   <div class="eco-sec">
     <div class="eco-sec-hdr">
-      <div class="eco-sec-ttl">04 — CHECKLIST AVANT POSITION</div>
-      <div style="font:400 11px var(--mono);color:var(--text-muted)">Valider TOUS les points avant d'entrer en trade</div>
+      <div class="eco-sec-ttl">04 — Checklist avant position</div>
+      <div style="font:400 11px var(--sans);color:var(--text-muted)">Valider TOUS les points avant d'entrer en trade</div>
     </div>
     <div style="display:grid;grid-template-columns:2fr 1fr;gap:14px">
       <div>
@@ -623,16 +623,16 @@ td{padding:10px 14px;font:400 12px var(--mono);white-space:nowrap}
       </div>
       <div style="display:flex;flex-direction:column;gap:10px">
         <div class="plan-card" id="plan-score-box" style="text-align:center;padding:28px 20px;transition:all .3s">
-          <div style="font:500 10px var(--sans);letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px">Score</div>
-          <div id="plan-score" style="font:500 52px var(--sans);color:var(--text-primary);line-height:1">0 / 8</div>
+          <div style="font:500 10px var(--sans);letter-spacing:.4px;color:var(--text-muted);margin-bottom:12px">Score</div>
+          <div id="plan-score" style="font:500 52px var(--sans);color:var(--text-primary);line-height:1;font-variant-numeric:tabular-nums">0 / 8</div>
           <div style="height:4px;background:var(--surface-2);border-radius:2px;margin:16px 0 12px;overflow:hidden">
             <div id="plan-score-bar" style="height:100%;width:0%;background:var(--ok);border-radius:2px;transition:width .4s ease"></div>
           </div>
           <div id="plan-score-msg" style="font:400 11px var(--sans);color:var(--text-muted);transition:color .3s">Score minimum requis : 8/8</div>
         </div>
         <div class="plan-card">
-          <div style="font:500 10px var(--sans);letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px">Rappels clés</div>
-          <div style="font:400 11px var(--mono);color:var(--text-muted);line-height:2.1">
+          <div style="font:500 10px var(--sans);letter-spacing:.4px;color:var(--text-muted);margin-bottom:10px">Rappels clés</div>
+          <div style="font:400 11px var(--sans);color:var(--text-muted);line-height:2.1">
             ↳ D1 uniquement — 19h00–20h00<br>
             ↳ Risk max 1% / trade (FTMO)<br>
             ↳ Max 3 trades simultanés<br>
@@ -792,7 +792,7 @@ function renderBalanceCurve(){
 function renderWL(){
   const s=stats();
   if(C.wl)C.wl.destroy();
-  C.wl=new Chart(document.getElementById('cWL'),{type:'doughnut',data:{labels:['Wins','Losses'],datasets:[{data:[s.wins,s.losses],backgroundColor:[cva('--ok',.7),cva('--danger',.7)],borderColor:[cv('--ok'),cv('--danger')],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{labels:{color:cv('--text-secondary'),font:{family:'IBM Plex Mono',size:11}}},tooltip:dTip()}}});
+  C.wl=new Chart(document.getElementById('cWL'),{type:'doughnut',data:{labels:['Wins','Losses'],datasets:[{data:[s.wins,s.losses],backgroundColor:[cva('--ok',.7),cva('--danger',.7)],borderColor:[cv('--ok'),cv('--danger')],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{labels:{color:cv('--text-secondary'),font:{family:cv('--sans'),size:11}}},tooltip:dTip()}}});
 }
 
 function renderPairChart(){
@@ -819,7 +819,7 @@ function renderFTMO(){
     {lbl:'Drawdown max (10%)',cur:ddPct.toFixed(2)+'%',tgt:'10%',fill:Math.min(ddPct/10*100,100),cls:ddPct>7?'r':ddPct>4?'a':'g',st:ddPct>7?'⚠ Danger':ddPct>4?'⚠ Attention':'✓ OK'},
     {lbl:'Jours tradés minimum',cur:days+' jours',tgt:'4 min.',fill:Math.min(days/4*100,100),cls:days>=4?'g':'a',st:days>=4?'✓ OK':(4-days)+' jour(s) restant'},
   ];
-  document.getElementById('ftmo-m').innerHTML=meters.map(m=>`<div style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font:400 11px var(--mono);color:var(--text-secondary)">${m.lbl}</span><span style="font:400 10px var(--mono);color:var(--text-muted)">${m.st}</span></div><div class="pb"><div class="pf ${m.cls}" style="width:${m.fill}%"></div></div><div style="display:flex;justify-content:space-between;margin-top:3px"><span style="font:500 12px var(--mono);color:var(--text-primary)">${m.cur}</span><span style="font:400 11px var(--mono);color:var(--text-muted)">${m.tgt}</span></div></div>`).join('');
+  document.getElementById('ftmo-m').innerHTML=meters.map(m=>`<div style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font:400 11px var(--sans);color:var(--text-secondary)">${m.lbl}</span><span style="font:400 10px var(--sans);color:var(--text-muted)">${m.st}</span></div><div class="pb"><div class="pf ${m.cls}" style="width:${m.fill}%"></div></div><div style="display:flex;justify-content:space-between;margin-top:3px"><span style="font:500 12px var(--sans);color:var(--text-primary)">${m.cur}</span><span style="font:400 11px var(--sans);color:var(--text-muted)">${m.tgt}</span></div></div>`).join('');
 }
 
 function renderDashTrades(){document.getElementById('dash-trades').innerHTML=buildTable([...trades].reverse().slice(0,6),false);}
@@ -871,7 +871,7 @@ function renderADir(){
   const d={Long:{w:0,l:0,pnl:0},Short:{w:0,l:0,pnl:0}};
   cl.forEach(t=>{if(!d[t.dir])return;d[t.dir].pnl+=(t.pnl||0);if(t.result==='Win')d[t.dir].w++;else if(t.result==='Loss')d[t.dir].l++;});
   if(C.ad)C.ad.destroy();
-  C.ad=new Chart(document.getElementById('caDir'),{type:'bar',data:{labels:['Long','Short'],datasets:[{label:'Wins',data:[d.Long.w,d.Short.w],backgroundColor:cva('--ok',.6),borderColor:cv('--ok'),borderWidth:1,borderRadius:3},{label:'Losses',data:[d.Long.l,d.Short.l],backgroundColor:cva('--danger',.6),borderColor:cv('--danger'),borderWidth:1,borderRadius:3},{label:'PnL ($)',data:[d.Long.pnl,d.Short.pnl],backgroundColor:cva('--accent',.4),borderColor:cv('--accent'),borderWidth:1,borderRadius:3,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:cv('--text-secondary'),font:{family:'IBM Plex Mono',size:11}}},tooltip:dTip()},scales:{x:{grid:{color:cv('--border')},ticks:{color:cv('--text-secondary'),font:{family:'IBM Plex Mono',size:10}}},y:{grid:{color:cv('--border')},ticks:{color:cv('--text-secondary'),font:{family:'IBM Plex Mono',size:10}}},y1:{position:'right',grid:{display:false},ticks:{color:cv('--accent'),font:{family:'IBM Plex Mono',size:10}}}}}});
+  C.ad=new Chart(document.getElementById('caDir'),{type:'bar',data:{labels:['Long','Short'],datasets:[{label:'Wins',data:[d.Long.w,d.Short.w],backgroundColor:cva('--ok',.6),borderColor:cv('--ok'),borderWidth:1,borderRadius:3},{label:'Losses',data:[d.Long.l,d.Short.l],backgroundColor:cva('--danger',.6),borderColor:cv('--danger'),borderWidth:1,borderRadius:3},{label:'PnL ($)',data:[d.Long.pnl,d.Short.pnl],backgroundColor:cva('--accent',.4),borderColor:cv('--accent'),borderWidth:1,borderRadius:3,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:cv('--text-secondary'),font:{family:cv('--sans'),size:11}}},tooltip:dTip()},scales:{x:{grid:{color:cv('--border')},ticks:{color:cv('--text-secondary'),font:{family:cv('--sans'),size:10}}},y:{grid:{color:cv('--border')},ticks:{color:cv('--text-secondary'),font:{family:cv('--sans'),size:10}}},y1:{position:'right',grid:{display:false},ticks:{color:cv('--accent'),font:{family:cv('--sans'),size:10}}}}}});
 }
 
 function renderARR(){
@@ -946,7 +946,7 @@ function delTrade(id){if(!confirm('Supprimer le trade #'+id+' ?'))return;trades=
 function recalc(){let b=START_BAL;trades.sort((a,b)=>(a.od||'').localeCompare(b.od||''));trades.forEach(t=>{t.eb=b;if(t.pnl!=null&&t.status==='Closed'){t.xb=b+t.pnl;t.pct=(t.pnl/b*100);b=t.xb;}});}
 
 function cOpts({yPfx='',ySfx='',fmtK=false,indexAxis='x'}={}){
-  return{responsive:true,maintainAspectRatio:false,indexAxis,plugins:{legend:{display:false},tooltip:dTip(yPfx,ySfx,fmtK)},scales:{x:{grid:{color:cv('--border')},ticks:{color:cv('--text-secondary'),font:{family:'IBM Plex Mono',size:10},maxRotation:35}},y:{grid:{color:cv('--border')},ticks:{color:cv('--text-secondary'),font:{family:'IBM Plex Mono',size:10},callback:v=>{if(fmtK&&Math.abs(v)>=1000)return yPfx+(v/1000).toFixed(0)+'k';return yPfx+v+ySfx;}}}}};
+  return{responsive:true,maintainAspectRatio:false,indexAxis,plugins:{legend:{display:false},tooltip:dTip(yPfx,ySfx,fmtK)},scales:{x:{grid:{color:cv('--border')},ticks:{color:cv('--text-secondary'),font:{family:cv('--sans'),size:10},maxRotation:35}},y:{grid:{color:cv('--border')},ticks:{color:cv('--text-secondary'),font:{family:cv('--sans'),size:10},callback:v=>{if(fmtK&&Math.abs(v)>=1000)return yPfx+(v/1000).toFixed(0)+'k';return yPfx+v+ySfx;}}}}};
 }
 function dTip(pfx='',sfx='',fmtK=false){
   return{backgroundColor:cv('--surface-2'),titleColor:cv('--text-primary'),bodyColor:cv('--text-secondary'),borderColor:cv('--border'),borderWidth:1,callbacks:{label:ctx=>{let v=ctx.parsed.y??ctx.parsed.x;if(fmtK&&Math.abs(v)>=1000)return pfx+(v/1000).toFixed(1)+'k';return pfx+(typeof v==='number'?v.toLocaleString('fr-FR',{minimumFractionDigits:0,maximumFractionDigits:2}):v)+sfx;}}};
